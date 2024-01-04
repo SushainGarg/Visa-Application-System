@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import applicantRoutes from "./routes/visaApplicant.routes.js";
+import applicantRoutes from "./routes/visaApplicant.route.js";
+import authRoutes from "./routes/auth.route.js";
 
 dotenv.config();
 
@@ -16,9 +17,12 @@ mongoose
 
 const app = express();
 
+app.use(express.json());
+
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
 
 
 app.use("/api/visaApplicant", applicantRoutes)
+app.use("/api/auth", authRoutes)

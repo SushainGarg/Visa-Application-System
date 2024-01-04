@@ -1,8 +1,8 @@
 import express from 'express';
 import { test } from '../controllers/visaApplicant.controller.js';
 
-const Router = express.Router();
+const router = express.Router();
 
-Router.get('/', test);
+router.get('/', test);
 
-export default Router;
+export default router;

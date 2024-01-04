@@ -1,25 +1,23 @@
 import { time } from "console";
 import mongoose from "mongoose";
 
-var mongoose = require('mongoose');
 
 const VisaApplicantSchema = mongoose.Schema({
-  applicant_id: {
-    type: Schema.Types.ObjectId,
-    unique: true,
-    required: true
-  },
   full_name: {
-    type: String
+    type: String,
+    required: true,
   },
   Date_of_Birth: {
-    type: Date
+    type: Date,
+    required: true,
   },
   gender: {
-    type: String
+    type: String,
+    required: true,
   },
   nationality: {
-    type: String
+    type: String,
+    required: true,
   },
   contact_details: {
     email: {
@@ -33,9 +31,10 @@ const VisaApplicantSchema = mongoose.Schema({
     }
   },
   address: {
-    type: String
+    type: String,
+    required: true,
   },
-  authectication_details: {
+  authentication_details: {
     username: {
       type: String,
       unique: true,
@@ -46,13 +45,9 @@ const VisaApplicantSchema = mongoose.Schema({
       required: true,
     }
   },
-  system_preferences: {
-    type: Schema.Types.ObjectId,
-    required: true
-  }
 }, {timeStamps: true});
 
 
-const VisaApplicant = mongoose.model("VisaApplicant", VisaApplicantSchema);
+const VisaApplicant = mongoose.model("Visapplicant", VisaApplicantSchema);
 
 export default VisaApplicant;
