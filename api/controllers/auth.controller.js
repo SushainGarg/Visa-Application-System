@@ -1,7 +1,7 @@
 import Visapplicant from "../models/visaApplicant.model.js";
 import bcryptjs from "bcryptjs";
 
-export const signup = async (req, res) => {
+export const signup = async (req, res , next) => {
     const {full_name , Date_of_Birth , gender , nationality , email , phone , address , username , password} = req.body;
     const hashedPassword = bcryptjs.hashSync(password, 10);
     const visaApplicant = new Visapplicant({
@@ -17,7 +17,7 @@ export const signup = async (req, res) => {
         await visaApplicant.save();
         res.status(201).json({message: "User Created successful"});
     } catch (error) {
-        res.status(500).json(error.message)
+       next(error);
     }
    
 };
