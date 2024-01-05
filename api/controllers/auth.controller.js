@@ -28,17 +28,17 @@ export const signin = async (req, res, next) => {
     const {email, password} = req.body;
     try {
         const visaApplicant = await Visapplicant.findOne({"contact_details.email": email});
-        if(!visaApplicant) next(errorHandler(404, visaApplicant+ " User not found"));
+        if(!visaApplicant) return next(errorHandler(404, email+ " not found"));
         const validPassword = bcryptjs.compareSync(password, visaApplicant.authentication_details.password);
-        if(!validPassword) next(errorHandler(401, "Invalid credentials"));
+        if(!validPassword) return next(errorHandler(401, "Invalid credentials"));
         const token = jwt.sign({id: visaApplicant._id}, process.env.JWT_SECRET);
         const {authentication_details, contact_details, ...rest} = visaApplicant._doc;
-        const expiry = new Date(Date.now() + 3600000); // 1 hour
+        const expiryDate = new Date(Date.now() + 3600000); // 1 hour
         res
-        .cookie("acces_token", token, {httpOnly: true, expires: expiry})
+        .cookie("acces_token", token, {httpOnly: true, expires: expiryDate})
         .status(200)
         .json(rest);
     } catch (error) {
         next(error);
     }
-}
+};

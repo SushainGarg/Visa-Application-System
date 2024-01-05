@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { Link , useNavigate } from "react-router-dom"
+import { SignInStart , SignInSuccess , SignInFailure } from "../redux/applicant/applicantSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Signin() {
   const [formData , setFormData] = useState({})
-  const [error , setError] = useState('')
-  const [loading , setLoading] = useState(false)
+  const {loading , error} = useSelector(state => state.applicant);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormData({...formData , [e.target.id] : e.target.value});
-  }
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      setError(false);
-      const res = await fetch('/api/auth/signin' , {
+        dispatch(SignInStart());
+        const res = await fetch('/api/auth/signin' , {
         method : 'POST' , 
         headers : {
           'Content-Type' : 'application/json',
@@ -22,18 +26,16 @@ export default function Signin() {
       body : JSON.stringify(formData)
     });
       const data = await res.json();
-      setLoading(false);
       if(data.success === false) {
-        setError(true);
+        dispatch(SignInFailure(data));
         return;
       }
+      dispatch(SignInSuccess(data));
       navigate('/');
     } catch (error) {
-      setLoading(false);
-      setError(true);
+      dispatch(SignInFailure(error));
     }
-    
-  }
+  };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
         <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
@@ -101,6 +103,9 @@ export default function Signin() {
                                 <span className='text-green-500 hover:text-green-700 transition-all duration-300 ease-in-out'>Register</span>
                               </Link>
                           </div>
+                          <p className="text-red-700 mt-5">
+                            {error ? error.message || 'Something went wrong!' : ''}
+                            </p>
                             <p className="mt-6 text-xs text-gray-600 text-center">
                                 I agree to abide by AFS's
                                 <a href="#" className="border-b border-gray-500 border-dotted">
