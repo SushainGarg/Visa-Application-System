@@ -41,7 +41,7 @@ const VisaApplicantSchema = mongoose.Schema({
       required: true,
     }
   },
-}, {timeStamps: true});
+}, {timestamps: true});
 
 
 const VisaApplicant = mongoose.model("Visa-applicant", VisaApplicantSchema);
