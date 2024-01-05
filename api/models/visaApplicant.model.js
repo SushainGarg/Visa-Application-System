@@ -5,19 +5,15 @@ import mongoose from "mongoose";
 const VisaApplicantSchema = mongoose.Schema({
   full_name: {
     type: String,
-    required: true,
   },
   Date_of_Birth: {
     type: Date,
-    required: true,
   },
   gender: {
     type: String,
-    required: true,
   },
   nationality: {
     type: String,
-    required: true,
   },
   contact_details: {
     email: {
@@ -28,11 +24,11 @@ const VisaApplicantSchema = mongoose.Schema({
     phone: {
       type: String,
       unique: true,
+      sparse: true,
     }
   },
   address: {
     type: String,
-    required: true,
   },
   authentication_details: {
     username: {
@@ -48,6 +44,6 @@ const VisaApplicantSchema = mongoose.Schema({
 }, {timeStamps: true});
 
 
-const VisaApplicant = mongoose.model("Visapplicant", VisaApplicantSchema);
+const VisaApplicant = mongoose.model("Visa-applicant", VisaApplicantSchema);
 
 export default VisaApplicant;

@@ -1,6 +1,37 @@
+import { useState } from "react";
 import { Link } from "react-router-dom"
 
 export default function Signup() {
+  const [formData , setFormData] = useState({})
+  const [error , setError] = useState('')
+  const [loading , setLoading] = useState(false)
+  const handleChange = (e) => {
+    setFormData({...formData , [e.target.id] : e.target.value});
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      setError(false);
+      const res = await fetch('/api/auth/signup' , {
+        method : 'POST' , 
+        headers : {
+          'Content-Type' : 'application/json',
+      }, 
+      body : JSON.stringify(formData)
+    });
+      const data = await res.json();
+      setLoading(false);
+      if(data.success === false) {
+        setError(true);
+        return;
+      }
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+    }
+    
+  }
   return (
   <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
     <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
@@ -56,33 +87,36 @@ export default function Signup() {
             </div>
 
             <div className="mx-auto max-w-xs">
+              <form onSubmit={handleSubmit}>
               <input
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                type="email" placeholder="Email" id='email'/>
+                type="email" placeholder="Email" id='email' onChange={handleChange}/>
               <input
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                type="text" placeholder="Username" id='username'/>
+                type="text" placeholder="Username" id='username' onChange={handleChange}/>
               <input
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                type="password" placeholder="Password" id='password'/>
-              <button
+                type="password" placeholder="Password" id='password' onChange={handleChange}/>
+              <button type="submit" disabled={loading}
                 className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg disabled:bg-indigo-300 hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth="2"
-                  strokeLinecap="round" strokeLinejoin="round">
+                {loading ? '' : <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth="2"
+                  strokeLinecap="round" strokeLinejoin="round"> 
                   <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
                   <circle cx="8.5" cy="7" r="4" />
                   <path d="M20 8v6M23 11h-6" />
-                </svg>
+                </svg>}
                 <span className="ml-3">
-                  Sign Up
+                  {loading ? 'Loading...' : 'Register'}
                 </span>
               </button>
+              </form>
               <div className='flex gap-2'>
                 <p>Have an Account?</p>
                 <Link to='/sign-in'>
                   <span className='text-blue-500'>Sign in</span>
                 </Link>
               </div>
+              <p className="text-red-700 mt-5">{error && 'Something went wrong!'}</p>
               <p className="mt-6 text-xs text-gray-600 text-center">
                 I agree to abide by AFS's
                 <a href="#" className="border-b border-gray-500 border-dotted">
