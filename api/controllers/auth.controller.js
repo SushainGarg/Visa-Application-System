@@ -35,7 +35,7 @@ export const signin = async (req, res, next) => {
         const {authentication_details, contact_details, ...rest} = visaApplicant._doc;
         const expiry = new Date(Date.now() + 3600000); // 1 hour
         res
-        .cookie("acces_token", token, {httpOnly: true} , {expires: expiry})
+        .cookie("acces_token", token, {httpOnly: true, expires: expiry})
         .status(200)
         .json(rest);
     } catch (error) {
