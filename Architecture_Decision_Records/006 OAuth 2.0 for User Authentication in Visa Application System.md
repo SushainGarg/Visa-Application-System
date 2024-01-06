@@ -28,22 +28,22 @@ Chosen option: "OAuth 2.0", because
 OAuth 2.0 offers a secure, standardized, flexible, and scalable framework for user authentication and authorization, aligning with the project's security requirements, emphasis on industry standards, potential for third-party integrations, and anticipated growth.
 
 
-### Consequences
+## Consequences
 
-## Good 
+### Good 
 
 * Industry-standard security framework for robust protection.
 * Delegation of authentication to trusted providers for convenience and reduced password fatigue.
 * Fine-grained access control for managing user permissions.
 * Wide support among libraries and tools for easier implementation.
 
-## Bad
+### Bad
 
 * Increased complexity in authentication flow and user experience, potentially requiring careful design and user guidance.
 * Need for proper configuration and secure token management to mitigate vulnerabilities.
 * Dependency on third-party providers for user authentication.
 
 
-### Confirmation
+## Confirmation
 
 Compliance with this ADR will be confirmed through security audits, code reviews, penetration testing, and monitoring of authentication logs to ensure secure implementation and usage of OAuth 2.0.
