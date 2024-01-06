@@ -28,9 +28,9 @@ The Visa Application System, built using a microservices architecture, requires 
 Chosen option: "RESTful APIs", because
 RESTful APIs offer a mature, standardized, and widely-adopted approach for service communication, aligning with the project's emphasis on interoperability, ease of integration, and maintainability, while also providing adequate performance and security capabilities for the system's needs.
 
-### Consequences
+## Consequences
 
-## Good
+### Good
 
 * Widely adopted standards for interoperability and developer familiarity.
 * Clear separation of concerns between client and server.
@@ -38,13 +38,13 @@ RESTful APIs offer a mature, standardized, and widely-adopted approach for servi
 * Supports various data formats and content negotiation.
 * Ease of testing and debugging individual services.
 
-## Bad
+### Bad
 
 * Need for careful API design to avoid over-fetching or under-fetching of data.
 * Potential performance overhead for chatty interactions or large payloads.
 * May not be ideal for real-time updates or complex data relationships.
 
 
-### Confirmation
+## Confirmation
 
 Compliance with this ADR will be confirmed through API documentation reviews, network traffic analysis, and code reviews to ensure adherence to RESTful API principles and best practices.
