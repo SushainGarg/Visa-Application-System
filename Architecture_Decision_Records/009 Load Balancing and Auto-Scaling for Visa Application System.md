@@ -27,36 +27,36 @@ The Visa Application System (VAS) anticipates variable traffic patterns and load
 Chosen option: " Load Balancing and Auto-Scaling (ELB and ASG) on AWS", because
 it Provides integrated, scalable, and cost-effective solution within the AWS environment, aligning with project's cloud-based architecture.
 
-### Consequences
+## Consequences
 
-## Good 
+### Good 
 
 * Automatic scaling based on demand, ensuring optimal resource utilization.
 * High availability and fault tolerance through load distribution and instance replacement.
 * Integration with other AWS services for monitoring and management.
 * Potential cost savings during low traffic periods.
 
-## Challenges
+### Challenges
 
 * Increased cost during high traffic periods (needs careful monitoring and cost optimization strategies).
 * Potential complexity in configuration and management, requiring attention to setup and maintenance.
 
 ## Implementation Details
 
-# Load Balancing
+### Load Balancing
 
 * Employ Elastic Load Balancing (ELB) for distributing traffic across multiple instances.
 * Configure ELB health checks for detecting and replacing unhealthy instances.
 
-# Auto-Scaling
+### Auto-Scaling
 
 * Utilize Auto Scaling Groups (ASGs) to automatically launch or terminate instances based on defined scaling policies.
 * Monitor key metrics (CPU, memory, request count) to trigger scaling events.
 * Define scaling policies to determine when and how to scale instances.
 
-### Confirmation
+## Confirmation
 
-# Compliance will be confirmed through
+### Compliance will be confirmed through
 
 * Successful distribution of traffic across instances by ELB.
 * Responsive scaling of instances by ASGs based on demand.
