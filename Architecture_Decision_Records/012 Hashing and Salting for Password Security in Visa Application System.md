@@ -31,14 +31,14 @@ Specific Algorithm: bcrypt with a work factor of 12
 Salt Length: 16 bytes
 Rationale: Provides strong protection against password attacks while balancing security with performance.   
 
-### Consequences
+## Consequences
 
-## Good 
+### Good 
 
 * Enhanced password security and reduced attack risks.
 * Compliance with industry best practices.
 
-## Challenges
+### Challenges
 
 * Careful implementation of hashing algorithms required.
 * Secure salt generation and storage essential.
@@ -46,23 +46,23 @@ Rationale: Provides strong protection against password attacks while balancing s
 
 ## Implementation Details
 
-# Hashing Implementation
+#### Hashing Implementation
 
 * Use a reputable bcrypt library for the chosen programming language.
 * Implement password hashing during account creation and login processes.
 * Generate unique, randomly generated 16-byte salts for each password.
 * Store hashed passwords and salts securely in the database.
 
-# Secure Coding Practices
+#### Secure Coding Practices
 
 * Mitigate vulnerabilities like SQL injection and buffer overflows.
 
-# Regular Review
+#### Regular Review
 
 * Stay updated with evolving password security best practices.
 * Re-evaluate hashing strategies periodically.
 
-# Implementation Example
+#### Implementation Example
 
 1. Library Selection and Installation
 
@@ -95,7 +95,7 @@ const isMatch = await bcrypt.compare(providedPassword, hashedPassword);
 ```
 If isMatch is true, the password is valid. Deny access if false
 
-# Key Considerations
+## Key Considerations
 
 * Secure Key Storage (if applicable): Protect any keys used for password hashing with appropriate encryption and access controls.
 * Regular Security Audits: Conduct regular security audits to ensure hashing implementation remains secure and up-to-date.
@@ -103,9 +103,9 @@ If isMatch is true, the password is valid. Deny access if false
 * Dependency Updates: Stay updated with the latest bcrypt library version to address potential vulnerabilities.
 
 
-### Confirmation
+## Confirmation
 
-# Compliance will be confirmed through:
+### Compliance will be confirmed through:
 
 * Successful implementation of bcrypt with correct work factor and salting.
 * Secure storage of hashed passwords and salts.
@@ -114,14 +114,14 @@ If isMatch is true, the password is valid. Deny access if false
 
 ## Additional Considerations
 
-# Password Strength Requirements
+### Password Strength Requirements
 
 Enforce strong password policies (e.g., length, complexity, rotation).
 
-# Secure Key Storage
+### Secure Key Storage
 
 Protect any keys used for password hashing (if applicable) with encryption and access controls.
 
-# Integration with Authentication Systems
+### Integration with Authentication Systems
 
 Ensure compatibility with OAuth 2.0 authentication flow for password management.
