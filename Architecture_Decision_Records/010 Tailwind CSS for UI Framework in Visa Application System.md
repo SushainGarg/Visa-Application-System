@@ -28,16 +28,16 @@ The Visa Application System (VAS) requires a user-friendly, visually appealing, 
 Chosen option: "Tailwind CSS", because
 it Offers the most flexibility, customization, and maintainability while aligning with the project's emphasis on developer experience and performance.
 
-### Consequences
+## Consequences
 
-## Good 
+### Good 
 
 * High degree of customization and control over UI design.
 * Clean and maintainable CSS code.
 * Rapid development and prototyping.
 * Potential performance benefits.
 
-## Challenges
+### Challenges
 
 * Learning curve for developers unfamiliar with utility-first CSS.
 * Initial setup and configuration overhead.
@@ -51,9 +51,9 @@ it Offers the most flexibility, customization, and maintainability while alignin
 * Usage: Use Tailwind's utility classes directly in HTML elements to apply styles.
 * Documentation: Provide clear documentation and guidelines for using Tailwind within the project.
 
-### Confirmation
+## Confirmation
 
-# Compliance will be confirmed through
+### Compliance will be confirmed through
 
 * Consistent and visually appealing UI components and pages.
 * Clean and organized CSS code.
