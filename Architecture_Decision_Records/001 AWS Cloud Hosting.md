@@ -9,10 +9,6 @@ deciders: {Sushain Garg}
 
 The Visa Application System requires a reliable, scalable, and secure hosting platform to support its features and user base. The system will be developed using a MERN stack (MongoDB, Express, React, Node.js) with Redux Toolkit, and a cloud-based solution is preferred for its flexibility, scalability, and cost benefits.
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8c0d601bbab6379cc28f305b807b1232835db6a3
 ## Decision Drivers
 
 * Scalability: The system must handle anticipated growth in user traffic and data volume.
@@ -20,10 +16,7 @@ The Visa Application System requires a reliable, scalable, and secure hosting pl
 * Cost: Hosting costs should be optimized while meeting performance and security requirements.
 * Global Reach: The system may need to serve users in multiple regions with low latency and compliance with regional regulations.
 * Managed Services: AWS offers a wide range of managed services that can simplify deployment, maintenance, and scaling of the application.
-<<<<<<< HEAD
 
-=======
->>>>>>> 8c0d601bbab6379cc28f305b807b1232835db6a3
 
 ## Considered Options
 
