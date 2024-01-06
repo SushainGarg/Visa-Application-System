@@ -1,5 +1,4 @@
 ---
-# These are optional elements. Feel free to remove any of them.
 status: "accepted"
 date: {2024-01-06}
 deciders: {Sushain Garg}
@@ -29,7 +28,6 @@ The Visa Application System, built using a microservices architecture, requires 
 Chosen option: "RESTful APIs", because
 RESTful APIs offer a mature, standardized, and widely-adopted approach for service communication, aligning with the project's emphasis on interoperability, ease of integration, and maintainability, while also providing adequate performance and security capabilities for the system's needs.
 
-<!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
 ## Good

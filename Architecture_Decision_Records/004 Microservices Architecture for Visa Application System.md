@@ -1,5 +1,4 @@
 ---
-# These are optional elements. Feel free to remove any of them.
 status: "accepted"
 date: {2024-01-06}
 deciders: {Sushain Garg}
@@ -9,7 +8,7 @@ deciders: {Sushain Garg}
 ## Context and Problem Statement
 
 The Visa Application System necessitates an architectural approach that promotes modularity, scalability, independent deployment, fault isolation, and development agility to accommodate anticipated growth, potential feature additions, and the need for continuous updates without compromising system availability.
-<!-- This is an optional element. Feel free to remove. -->
+
 ## Decision Drivers
 
 * Modularity: Decompose the system into smaller, independent services to enhance maintainability, reusability, and testability.
@@ -28,7 +27,6 @@ The Visa Application System necessitates an architectural approach that promotes
 Chosen option: "Microservices architecture", because
 Microservices offer superior modularity, scalability, independent deployment, fault isolation, and development agility, aligning with the project's anticipated growth, continuous delivery needs, and focus on resilience and maintainability.
 
-<!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
 * Good, because Increased modularity for better maintainability and reusability.

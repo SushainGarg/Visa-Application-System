@@ -1,5 +1,4 @@
 ---
-# These are optional elements. Feel free to remove any of them.
 status: "accepted"
 date: {2024-01-06}
 deciders: {Sushain Garg}
