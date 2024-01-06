@@ -29,37 +29,37 @@ deciders: {Sushain Garg}
 Chosen option: "WCAG 2.1 compliance", because
 it Provides the most comprehensive framework for ensuring accessibility, meeting legal requirements, and fostering an inclusive user experience.
 
-### Consequences
+## Consequences
 
-## Good 
+### Good 
 
 * Increased user base and satisfaction by enabling access for users with disabilities.
 * Reduced risk of legal challenges and potential financial penalties.
 * Improved brand reputation and social responsibility image.
 * Enhanced user experience for all users through better design practices.
 
-## Challenges
+### Challenges
 
 * Requires careful planning, testing, and potential adjustments to UI components and functionality.
 * May increase development time and effort initially, but often leads to long-term benefits.
 
 ## Implementation Details
 
-# Adhere to WCAG 2.1 guidelines
+#### Adhere to WCAG 2.1 guidelines
 
 * Perceivable: Content must be presented in ways users can perceive (e.g., text alternatives for non-text content, captions for audio/video).
 * Operable: Interface elements must be operable by various input methods (e.g., keyboard navigation, sufficient contrast).
 * Understandable: Information and operation must be understandable (e.g., clear language, consistent navigation).
 * Robust: Content must be compatible with assistive technologies (e.g., screen readers, speech recognition).
 
-# Involve accessibility experts: Consult with experts to ensure compliance and best practices.
-# Conduct accessibility testing: Regularly test with assistive technologies and users with disabilities.
-# Prioritize accessibility throughout development: Integrate accessibility considerations into design, coding, and testing phases.
-# Provide accessibility documentation: Offer clear instructions for users on how to use assistive technologies with the system.
+#### Involve accessibility experts: Consult with experts to ensure compliance and best practices.
+#### Conduct accessibility testing: Regularly test with assistive technologies and users with disabilities.
+#### Prioritize accessibility throughout development: Integrate accessibility considerations into design, coding, and testing phases.
+#### Provide accessibility documentation: Offer clear instructions for users on how to use assistive technologies with the system.
 
-### Confirmation
+## Confirmation
 
-# Compliance will be confirmed through
+### Compliance will be confirmed through
 
 * Successful completion of accessibility audits and testing.
 * Adherence to WCAG 2.1 guidelines in design and implementation.
