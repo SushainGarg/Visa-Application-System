@@ -1,5 +1,4 @@
 ---
-# These are optional elements. Feel free to remove any of them.
 status: "accepted"
 date: {2024-01-06}
 deciders: {Sushain Garg}
@@ -10,7 +9,6 @@ deciders: {Sushain Garg}
 
 The Visa Application System requires a database solution that can efficiently store and manage diverse user data, application information, and potential unstructured data types, while also offering scalability and performance to handle anticipated growth.
 
-<!-- This is an optional element. Feel free to remove. -->
 ## Decision Drivers
 
 * Data Diversity: The system needs to accommodate various data types, including structured and unstructured data, to manage user profiles, application forms, supporting documents, and potential future requirements.
@@ -30,7 +28,6 @@ The Visa Application System requires a database solution that can efficiently st
 Chosen option: "MongoDB", because
 MongoDB's document-oriented model, schema flexibility, horizontal scalability, high performance, and seamless integration with the MERN stack and AWS make it the most suitable choice for the project's data needs.
 
-<!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
 * Good, because Accommodates diverse data types and flexible schema for evolving requirements.

@@ -1,5 +1,4 @@
 ---
-# These are optional elements. Feel free to remove any of them.
 status: "accepted"
 date: {2024-01-06}
 deciders: {Sushain Garg}
@@ -10,7 +9,6 @@ deciders: {Sushain Garg}
 
 The Visa Application System needs a modern, efficient, and scalable technology stack for development. The stack should facilitate rapid development, handle diverse data types, support a seamless user experience, and integrate well with the chosen cloud platform (AWS).
 
-<!-- This is an optional element. Feel free to remove. -->
 ## Decision Drivers
 
 * Rapid Development: The chosen stack should enable quick prototyping, efficient development, and streamlined testing processes.
@@ -19,7 +17,6 @@ The Visa Application System needs a modern, efficient, and scalable technology s
 * Ecosystem Integration: The stack should integrate well with AWS services and other potential third-party tools or libraries.
 * Developer Expertise: The availability of expertise in the chosen stack is crucial for successful implementation and maintenance.
 * JavaScript Proficiency: strong JavaScript skills align well with a JavaScript-based stack.
-* … <!-- numbers of drivers can vary -->
 
 ## Considered Options
 
@@ -33,7 +30,6 @@ The Visa Application System needs a modern, efficient, and scalable technology s
 Chosen option: "MERN stack with Redux Toolkit", because
 MERN offers a cohesive JavaScript ecosystem for full-stack development, efficient performance, flexibility with diverse data types, a strong focus on user experience through React, and seamless integration with AWS services. Redux Toolkit simplifies state management and streamlines development.
 
-<!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
 * Good, because Rapid development with JavaScript's agility and the MERN stack's synergy.
