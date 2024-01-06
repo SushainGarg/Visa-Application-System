@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import applicantRoutes from "./routes/visaApplicant.route.js";
 import authRoutes from "./routes/auth.route.js";
-import e from "express";
 
 dotenv.config();
 
