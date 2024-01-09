@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Profile from './pages/profile';
 import Header from './components/Header';
+import PrivateRoute from './components/privateRoute';
 
 
 export default function App() {
@@ -14,9 +15,11 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
-      <Route path="/profile" element={<Profile />} />
       <Route path="/sign-up" element={<Signup />} />
       <Route path="/sign-in" element={<Signin />} />
+      <Route element={<PrivateRoute />} > {/* Fixed the opening tag */}
+        <Route path="/profile" element={<Profile />} />
+      </Route> {/* Added the closing tag */}
     </Routes>
   </BrowserRouter>;
 }
