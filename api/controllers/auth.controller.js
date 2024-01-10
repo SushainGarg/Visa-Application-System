@@ -32,7 +32,7 @@ export const signin = async (req, res, next) => {
         const validPassword = bcryptjs.compareSync(password, visaApplicant.authentication_details.password);
         if(!validPassword) return next(errorHandler(401, "Invalid credentials"));
         const token = jwt.sign({id: visaApplicant._id}, process.env.JWT_SECRET);
-        const {authentication_details, contact_details, ...rest} = visaApplicant._doc;
+        const {...rest} = visaApplicant._doc;
         const expiryDate = new Date(Date.now() + 3600000); // 1 hour
         res
         .cookie("acces_token", token, {httpOnly: true, expires: expiryDate})
