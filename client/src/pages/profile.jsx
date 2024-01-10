@@ -69,7 +69,7 @@ export default function profile() {
       <div className="flex flex-col sm:items-center sm:justify-between">
         <form action="">
           <input type="file" ref={profile_img_Ref} hidden accept="image/*" onChange={(e) => setImage(e.target.files[0])}/>
-          <img src={currentApplicant.profile_picture} alt="" className="h-40 w-40 self-center cursor-pointer rounded-full object-cover" onClick={() => profile_img_Ref.current.click()}/>
+          <img src={formData.profile_picture || currentApplicant.profile_picture} alt="" className="h-40 w-40 self-center cursor-pointer rounded-full object-cover" onClick={() => profile_img_Ref.current.click()}/>
           <p className="text-sm self-center">{imageError ? (
             <span className="text-red-700">Error Uploading Image (file size must be less than 2 MB)</span>
           ) : imagePercent > 0 && imagePercent < 100 ? (
