@@ -1,7 +1,39 @@
 import { useSelector } from "react-redux"
+import { useRef, useState , useEffect } from "react";
+import {getDownloadURL, getStorage,ref , uploadBytesResumable} from "firebase/storage";
+import { app }  from "../firebase";
 
 export default function profile() {
+  const profile_img_Ref = useRef(null);
+  const [image , setImage] = useState(null);
+  const [imagePercent , setImagePercent] = useState(0);
+  const [imageError , setImageError] = useState(false);
+ const [formData , setFormData] = useState({});
+ console.log(formData);
+
   const {currentApplicant} = useSelector(state => state.applicant);
+  useEffect(() => {
+    if(image) {
+      handleImageUpload(image);
+    }
+  } , [image])
+  const handleImageUpload = async (image) => {
+    const storage = getStorage(app);
+    const imageName = new Date().getTime() + image.name;
+    const storageRef = ref(storage , imageName);
+    const uploadTask = uploadBytesResumable(storageRef , image);
+    uploadTask.on('state_changed', 
+    (snapshot) => { 
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setImagePercent(Math.round(progress));
+    },
+    (error) => {
+      setImageError(true);
+    },
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => setFormData({...formData , profile_picture : downloadURL}))
+    });
+  };
   return (
     <div className="mx-4 min-h-screen max-w-screen-xl sm:mx-8 xl:mx-auto">
   <h1 className="border-b py-6 text-4xl font-semibold">Settings</h1>
@@ -31,13 +63,20 @@ export default function profile() {
     <div className="col-span-8 overflow-hidden rounded-xl sm:bg-gray-50 sm:px-8 sm:shadow">
       <div className="pt-4">
         <h1 className="py-2 text-2xl font-semibold">Account settings</h1>
-        <p className="font- text-slate-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
       </div>
       <hr className="mt-4 mb-8" />
       <p className="py-2 text-xl font-semibold"></p>
       <div className="flex flex-col sm:items-center sm:justify-between">
         <form action="">
-          <img src={currentApplicant.profile_picture} alt="" className="h-40 w-40 self-center cursor-pointer rounded-full object-cover" />
+          <input type="file" ref={profile_img_Ref} hidden accept="image/*" onChange={(e) => setImage(e.target.files[0])}/>
+          <img src={currentApplicant.profile_picture} alt="" className="h-40 w-40 self-center cursor-pointer rounded-full object-cover" onClick={() => profile_img_Ref.current.click()}/>
+          <p className="text-sm self-center">{imageError ? (
+            <span className="text-red-700">Error Uploading Image (file size must be less than 2 MB)</span>
+          ) : imagePercent > 0 && imagePercent < 100 ? (
+            <span className="text-blue-700">{` Uploading:  ${imagePercent} %`}</span>
+          ) : imagePercent === 100 ? (
+            <span className="text-green-700">Image Uploaded Successfully</span>
+          ) : ''}</p>
           </form>
       </div>
       <hr className="mt-4 mb-8" />
@@ -105,4 +144,4 @@ export default function profile() {
 </div>
 
   )
-}
+  }
