@@ -19,6 +19,7 @@ export default function Signin() {
     e.preventDefault();
     try {
         dispatch(SignInStart());
+        console.log(formData);
         const res = await fetch('/api/auth/signin' , {
         method : 'POST' , 
         headers : {
@@ -27,11 +28,12 @@ export default function Signin() {
       body : JSON.stringify(formData)
     });
       const data = await res.json();
-      console.log(data);
+
       if(data.success === false) {
         dispatch(SignInFailure(data));
         return;
       }
+      console.log(data);
       dispatch(SignInSuccess(data));
       navigate('/');
     } catch (error) {
@@ -102,8 +104,8 @@ export default function Signin() {
                 </div>
             </div>
             <div className="flex-1 bg-green-100 text-center hidden lg:flex">
-                <div className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
-                    style={{backgroundImage: 'url(https://drive.google.com/uc?export=view&id=1KZ_Ub_2lZ0dHbKV0fAIhxVhiQA183RCz)'}}>
+                <div className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat backdrop-blur-md"
+                    style={{backgroundImage:'url(https://img.pikbest.com/back_our/20210918/bg/0956026339cb3.png!sw800)'}}>
                 </div>
             </div>
         </div>

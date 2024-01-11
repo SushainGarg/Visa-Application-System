@@ -15,31 +15,28 @@ const VisaApplicantSchema = mongoose.Schema({
   nationality: {
     type: String,
   },
-  contact_details: {
-    email: {
+
+  email:{
       type: String,
       unique: true,
       required: true,
-    },
-    phone: {
+  },
+  phone:{
       type: String,
       unique: true,
       sparse: true,
-    }
   },
   address: {
     type: String,
   },
-  authentication_details: {
-    username: {
-      type: String,
+  username: {
+    type: String,
       unique: true,
       required: true
-    },
-    password: {
+  },
+  password: {
       type: String,
       required: true,
-    }
   },
   profile_picture: {
     type: String,

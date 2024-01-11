@@ -85,7 +85,7 @@ export default function profile() {
       <p className="py-2 text-xl font-semibold">Email Address</p>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-              <input type="email" defaultValue={currentApplicant.contact_details.email} id="email" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="johndoe@gmail.com" />
+              <input type="email" defaultValue={currentApplicant.email} id="email" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="johndoe@gmail.com" />
             </div>
       </div>
       </div>
@@ -93,7 +93,7 @@ export default function profile() {
       <p className="py-2 text-xl font-semibold">Username</p>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-              <input type="text" defaultValue={currentApplicant.authentication_details.username} id="username" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="johndoe" />
+              <input type="text" defaultValue={currentApplicant.username} id="username" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="johndoe" />
             </div>
       </div>
       </div>
