@@ -48,7 +48,7 @@ export const signin = async (req, res, next) => {
 
 export const google = async (req, res, next) => {
     try {
-        const visaApplicant = await Visapplicant.findOne({"email": req.body.email}); // find the user with the email
+        const visaApplicant = await Visapplicant.findOne({email: req.body.email}); // find the user with the email
         if(visaApplicant) {
             const token = jwt.sign({id: visaApplicant._id}, process.env.JWT_SECRET); // JWT_SECRET is the secret key
             const {password: hashedPassword, ...rest} = visaApplicant._doc; // _doc is the document itself
@@ -61,13 +61,18 @@ export const google = async (req, res, next) => {
 
             const username = req.body.name.split(" ").join("").toLowerCase() + Math.random().toString(36).slice(-8); // username is the name without spaces and a random number
             const visaApplicant = new Visapplicant({
-                full_name: req.body.full_name,
                 email : req.body.email,
                 username: username, 
                 password: hashedPassword,
-                profile_picture: req.body.photoUrl
+                profile_picture: req.body.photo,
             }); // create a new user
-            await visaApplicant.save(); // save the user
+            console.log(visaApplicant);
+            try {
+                await visaApplicant.save(); // save the user
+            } catch (error) {
+                console.log(error);
+            }
+            
             const token = jwt.sign({id: visaApplicant._id}, process.env.JWT_SECRET); // JWT_SECRET is the secret key
             const {password : hashedPassword2, ...rest} = visaApplicant._doc; // _doc is the document itself
             const expiryDate = new Date(Date.now() + 3600000); // 1 hour
@@ -77,6 +82,6 @@ export const google = async (req, res, next) => {
             }).status(200).json(rest); // send the user data to the client
         }
     } catch (error) {
-        console.log('Google unable to Authenticate' , error); // log the error
+        next(error); // log the error
     }
 }

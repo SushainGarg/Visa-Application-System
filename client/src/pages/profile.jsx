@@ -2,16 +2,20 @@ import { useSelector } from "react-redux"
 import { useRef, useState , useEffect } from "react";
 import {getDownloadURL, getStorage,ref , uploadBytesResumable} from "firebase/storage";
 import { app }  from "../firebase";
+import {useDispatch} from 'react-redux';
+import {updateApplicantFailure , updateApplicantSuccess , updateApplicantStart} from '../redux/applicant/applicantSlice';
+import { set } from "mongoose";
 
 export default function profile() {
+  const dispatch = useDispatch();
   const profile_img_Ref = useRef(null);
   const [image , setImage] = useState(null);
   const [imagePercent , setImagePercent] = useState(0);
   const [imageError , setImageError] = useState(false);
- const [formData , setFormData] = useState({});
- console.log(formData);
-
-  const {currentApplicant} = useSelector(state => state.applicant);
+  const [formData , setFormData] = useState({});
+  const [updateSuccess , setUpdateSuccess] = useState(false);
+  
+  const {currentApplicant , loading , error} = useSelector(state => state.applicant);
   useEffect(() => {
     if(image) {
       handleImageUpload(image);
@@ -33,6 +37,35 @@ export default function profile() {
     () => {
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => setFormData({...formData , profile_picture : downloadURL}))
     });
+  };
+
+  const handleChange = (e) => {
+    setFormData({...formData , [e.target.id] : e.target.value});
+
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(updateApplicantStart());
+      const res = await fetch(`/api/visaApplicant/update/${currentApplicant._id}` , {
+        method : 'POST' , 
+        headers : {
+          'Content-Type' : 'application/json',
+      },
+      body : JSON.stringify(formData)
+    });
+    const data = await res.json();
+    if(data.success === false) {
+      dispatch(updateApplicantFailure(data));
+      return;
+    }
+    dispatch(updateApplicantSuccess(data));
+    setUpdateSuccess(true);
+    } catch (error) {
+      dispatch(updateApplicantFailure(error));
+      console.log(error);
+    }
   };
   return (
     <div className="mx-4 min-h-screen max-w-screen-xl sm:mx-8 xl:mx-auto">
@@ -64,10 +97,11 @@ export default function profile() {
       <div className="pt-4">
         <h1 className="py-2 text-2xl font-semibold">Account settings</h1>
       </div>
+      <form action="" onSubmit={handleSubmit}>
       <hr className="mt-4 mb-8" />
       <p className="py-2 text-xl font-semibold"></p>
       <div className="flex flex-col sm:items-center sm:justify-between">
-        <form action="">
+       
           <input type="file" ref={profile_img_Ref} hidden accept="image/*" onChange={(e) => setImage(e.target.files[0])}/>
           <img src={formData.profile_picture || currentApplicant.profile_picture} alt="" className="h-40 w-40 self-center cursor-pointer rounded-full object-cover" onClick={() => profile_img_Ref.current.click()}/>
           <p className="text-sm self-center">{imageError ? (
@@ -77,7 +111,7 @@ export default function profile() {
           ) : imagePercent === 100 ? (
             <span className="text-green-700">Image Uploaded Successfully</span>
           ) : ''}</p>
-          </form>
+          
       </div>
       <hr className="mt-4 mb-8" />
       <div className="flex flex-row space-x-20">
@@ -85,7 +119,7 @@ export default function profile() {
       <p className="py-2 text-xl font-semibold">Email Address</p>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-              <input type="email" defaultValue={currentApplicant.email} id="email" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="johndoe@gmail.com" />
+              <input type="email" defaultValue={currentApplicant.email}  onChange={handleChange} id="email" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="johndoe@gmail.com" />
             </div>
       </div>
       </div>
@@ -93,7 +127,7 @@ export default function profile() {
       <p className="py-2 text-xl font-semibold">Username</p>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-              <input type="text" defaultValue={currentApplicant.username} id="username" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="johndoe" />
+              <input type="text" defaultValue={currentApplicant.username} onChange={handleChange} id="username" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="johndoe" />
             </div>
       </div>
       </div>
@@ -104,15 +138,9 @@ export default function profile() {
       <div className="flex items-center">
         <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-20">
           <label htmlFor="login-password">
-            <span className="text-sm text-gray-500">Current Password</span>
-            <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-              <input type="password" id="login-password" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="***********" />
-            </div>
-          </label>
-          <label htmlFor="login-password">
             <span className="text-sm text-gray-500">New Password</span>
             <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-              <input type="password" id="login-password" className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="***********" />
+              <input type="password" id="login-password" onChange={handleChange} className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="***********" />
             </div>
           </label>
         </div>
@@ -123,7 +151,7 @@ export default function profile() {
       <p className="mt-2">Can't remember your current password. <a className="text-sm font-semibold text-blue-600 underline decoration-2" href="#">Recover Account</a></p>
     <div className="flex flex-row justify-between">
       <button className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white">Sign out</button>
-      <button className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white">Update</button>
+      <button className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white">{loading ? 'Loading...' : 'Update'}</button>
     </div>
      
       <hr className="mt-4 mb-8" />
@@ -139,9 +167,12 @@ export default function profile() {
         <p className="mt-2">Make sure you have taken backup of your account in case you ever need to get access to your data. We will completely wipe your data. There is no way to access your account after this action.</p>
         <button className="ml-auto text-sm font-semibold text-rose-600 underline decoration-2">Continue with deletion</button>
       </div>
+      </form>
+      <p className="text-red-700 mt-5">{error && 'something went wrong'}</p>
+      <p className="text-green-700 mt-5">{updateSuccess && 'User is updated Successfully'}</p>
     </div>
   </div>
 </div>
 
   )
-  }
+}

@@ -21,10 +21,22 @@ const applicantSlice = createSlice({
         SignInFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
-        }
+        },
+        updateApplicantStart: (state) => {
+            state.loading = true;
+        },
+        updateApplicantSuccess: (state, action) => {
+            state.currentApplicant = action.payload;
+            state.loading = false;
+            state.error = false;
+        },
+        updateApplicantFailure: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
     }
 });
 
-export const { SignInStart, SignInSuccess, SignInFailure } = applicantSlice.actions;
+export const { SignInStart, SignInSuccess, SignInFailure , updateApplicantFailure , updateApplicantSuccess , updateApplicantStart} = applicantSlice.actions;
 
 export default applicantSlice.reducer;
