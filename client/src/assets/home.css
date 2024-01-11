@@ -1,0 +1,87 @@
+.home-container {
+    padding: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: sans-serif;
+  }
+  
+  .hero-section {
+    text-align: center;
+    padding: 100px 0;
+  }
+  
+  .hero-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .hero-description {
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .features-section {
+    padding: 50px 0;
+  }
+  
+  .features-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  
+  .feature-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .feature-card i {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .testimonial-section {
+    padding: 50px 0;
+  }
+  
+  .testimonial-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.2em;
+    line-height: 1.5
+  }
+  .testimonial-card span {
+    font-style: italic;
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .get-started-section {
+    text-align: center;
+    padding: 50px 0;
+  }
