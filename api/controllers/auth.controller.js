@@ -46,6 +46,10 @@ export const signin = async (req, res, next) => {
     }
 };
 
+export const logout = (req, res) => {
+    res.clearCookie("acces_token").json( "Logged out successfully");
+};
+
 export const google = async (req, res, next) => {
     try {
         const visaApplicant = await Visapplicant.findOne({email: req.body.email}); // find the user with the email
@@ -62,7 +66,7 @@ export const google = async (req, res, next) => {
             const username = req.body.name.split(" ").join("").toLowerCase() + Math.random().toString(36).slice(-8); // username is the name without spaces and a random number
             const visaApplicant = new Visapplicant({
                 email : req.body.email,
-                username: username, 
+                username, 
                 password: hashedPassword,
                 profile_picture: req.body.photo,
             }); // create a new user
@@ -76,6 +80,7 @@ export const google = async (req, res, next) => {
             const token = jwt.sign({id: visaApplicant._id}, process.env.JWT_SECRET); // JWT_SECRET is the secret key
             const {password : hashedPassword2, ...rest} = visaApplicant._doc; // _doc is the document itself
             const expiryDate = new Date(Date.now() + 3600000); // 1 hour
+            console.log(rest);
             res.cookie("acces_token", token, {
                 httpOnly: true, 
                 expires: expiryDate,

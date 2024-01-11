@@ -42,3 +42,16 @@ export const updateVisaApplicant = async (req, res , next) => {
         next(error);
     }
 }
+
+
+export const deleteVisaApplicant = async (req, res , next) => {
+    if (req.visaApplicant.id !== req.params.id) {
+        return next(errorHandler(401, "You can delete only your account!"))
+    }
+    try {
+        await VisaApplicant.findByIdAndDelete(req.params.id);
+        res.status(200).json({message: "Account has been deleted successfully!"});
+    } catch (error) {
+        next(error);
+    }
+}

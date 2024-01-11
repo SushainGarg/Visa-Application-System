@@ -3,7 +3,7 @@ import { useRef, useState , useEffect } from "react";
 import {getDownloadURL, getStorage,ref , uploadBytesResumable} from "firebase/storage";
 import { app }  from "../firebase";
 import {useDispatch} from 'react-redux';
-import {updateApplicantFailure , updateApplicantSuccess , updateApplicantStart} from '../redux/applicant/applicantSlice';
+import {updateApplicantFailure , updateApplicantSuccess , updateApplicantStart , deleteApplicantFailure , deleteApplicantSuccess , deleteApplicantStart , signOut} from '../redux/applicant/applicantSlice';
 import { set } from "mongoose";
 
 export default function profile() {
@@ -67,6 +67,33 @@ export default function profile() {
       console.log(error);
     }
   };
+
+  const handleDeleteAccount = async () => {
+
+    try {
+      dispatch(deleteApplicantStart());
+      const res = await fetch(`/api/visaApplicant/delete/${currentApplicant._id}` , {
+        method : 'DELETE' , 
+    });    
+    const data = await res.json();
+    if(data.success === false) {
+      dispatch(deleteApplicantFailure(data));
+      return;
+    }
+    dispatch(deleteApplicantSuccess(data));
+    } catch (error) {
+      dispatch(deleteApplicantFailure(error));
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await fetch('/api/auth/signout');
+      dispatch(signOut());
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className="mx-4 min-h-screen max-w-screen-xl sm:mx-8 xl:mx-auto">
   <h1 className="border-b py-6 text-4xl font-semibold">Settings</h1>
@@ -94,8 +121,9 @@ export default function profile() {
     </div>
 
     <div className="col-span-8 overflow-hidden rounded-xl sm:bg-gray-50 sm:px-8 sm:shadow">
-      <div className="pt-4">
+      <div className="pt-4 flex flex-row justify-between">
         <h1 className="py-2 text-2xl font-semibold">Account settings</h1>
+        <button onClick={handleSignOut} className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white">Sign out</button>
       </div>
       <form action="" onSubmit={handleSubmit}>
       <hr className="mt-4 mb-8" />
@@ -150,12 +178,10 @@ export default function profile() {
       </div>
       <p className="mt-2">Can't remember your current password. <a className="text-sm font-semibold text-blue-600 underline decoration-2" href="#">Recover Account</a></p>
     <div className="flex flex-row justify-between">
-      <button className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white">Sign out</button>
-      <button className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white">{loading ? 'Loading...' : 'Update'}</button>
+      <button className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white">{loading ? 'Loading...' : 'Update Account Details'}</button>
     </div>
-     
+    </form>
       <hr className="mt-4 mb-8" />
-
       <div className="mb-10">
         <p className="py-2 text-xl font-semibold">Delete Account</p>
         <p className="inline-flex items-center rounded-full bg-rose-100 px-4 py-1 text-rose-600">
@@ -165,9 +191,8 @@ export default function profile() {
           Proceed with caution
         </p>
         <p className="mt-2">Make sure you have taken backup of your account in case you ever need to get access to your data. We will completely wipe your data. There is no way to access your account after this action.</p>
-        <button className="ml-auto text-sm font-semibold text-rose-600 underline decoration-2">Continue with deletion</button>
+        <button onClick={handleDeleteAccount} className="ml-auto text-sm font-semibold text-rose-600 underline decoration-2">Continue with deletion</button>
       </div>
-      </form>
       <p className="text-red-700 mt-5">{error && 'something went wrong'}</p>
       <p className="text-green-700 mt-5">{updateSuccess && 'User is updated Successfully'}</p>
     </div>

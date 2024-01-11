@@ -34,9 +34,37 @@ const applicantSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        deleteApplicantStart: (state) => {
+            state.loading = true;
+        },
+        deleteApplicantSuccess: (state) => {
+            state.currentApplicant = null;
+            state.loading = false;
+            state.error = false;
+        },
+        deleteApplicantFailure: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        signOut: (state) => {
+            state.currentApplicant = null;
+            state.loading = false;
+            state.error = false;
+        },
     }
 });
 
-export const { SignInStart, SignInSuccess, SignInFailure , updateApplicantFailure , updateApplicantSuccess , updateApplicantStart} = applicantSlice.actions;
+export const {
+  SignInStart,
+  SignInSuccess,
+  SignInFailure,
+  updateApplicantFailure,
+  updateApplicantSuccess,
+  updateApplicantStart,
+  deleteApplicantFailure,
+  deleteApplicantSuccess,
+  deleteApplicantStart,
+  signOut,
+} = applicantSlice.actions;
 
 export default applicantSlice.reducer;
